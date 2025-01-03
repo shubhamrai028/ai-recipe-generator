@@ -8,7 +8,7 @@ function App() {
     event.preventDefault();
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/generate-recipe', { 
+      const response = await fetch('https://qntxvbadt1.execute-api.us-east-1.amazonaws.com/stage1/recipe', { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -21,7 +21,8 @@ function App() {
       }
 
       const data = await response.json();
-      setRecipe(data.recipe);
+      console.log(data)
+      setRecipe(data);
     } catch (error) {
       console.error('Error generating recipe:', error);
       setRecipe('Error generating recipe. Please try again.');
@@ -45,10 +46,8 @@ function App() {
         <br />
         <button type="submit">Generate Recipe</button>
       </form>
-      <div id="recipe">
-        {recipe && <div dangerouslySetInnerHTML={{ __html: recipe }}></div>}
+      <div id="recipe" dangerouslySetInnerHTML={{ __html: recipe }} />
       </div>
-    </div>
   );
 }
 
